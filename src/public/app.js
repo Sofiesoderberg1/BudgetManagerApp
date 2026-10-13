@@ -6,6 +6,43 @@ const form = document.querySelector('#transaction-form')
 const message = document.querySelector('#message')
 const transactionList = document.querySelector('#transaction-list')
 
+const typeField = document.querySelector('#type')
+const categoryFieldElement = document.querySelector('#category')
+
+const expenseCategories = [
+  'Food',
+  'Transport',
+  'Housing',
+  'Insurance',
+  'Entertainment'
+]
+
+const incomeCategories = [
+  'Salary',
+  'Student Support',
+  'Business Profit'
+]
+
+function updateCategories() {
+  const categories = typeField.value === 'income'
+    ? incomeCategories
+    : expenseCategories
+
+  categoryFieldElement.replaceChildren()
+
+  categories.forEach((category) => {
+    const option = document.createElement('option')
+    option.value = category
+    option.textContent = category
+    categoryFieldElement.appendChild(option)
+  })
+}
+
+typeField.addEventListener('change', updateCategories)
+
+updateCategories()
+
+
 const totalIncomeElement = document.querySelector('#total-income')
 const totalExpensesElement = document.querySelector('#total-expenses')
 const balanceElement = document.querySelector('#balance')
