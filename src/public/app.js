@@ -105,3 +105,33 @@ transactionList.appendChild(listItem)
 form.reset()
 
 })
+
+async function loadTransactions() {
+  try {
+    const response = await fetch('/api/transactions')
+
+    if (!response.ok) {
+      throw new Error('Could not load transactions.')
+    }
+
+    const transactions = await response.json()
+
+    transactionList.replaceChildren()
+
+    transactions.forEach((transaction) => {
+      const listItem = document.createElement('li')
+
+      listItem.textContent =
+        `${transaction.date} — ${transaction.description} — ` +
+        `€${Number(transaction.amount).toFixed(2)} — ` +
+        `${transaction.category} (${transaction.type})`
+
+      transactionList.appendChild(listItem)
+    })
+  } catch (error) {
+    console.error(error)
+    message.textContent = 'Could not load transactions.'
+  }
+}
+
+loadTransactions()
