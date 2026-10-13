@@ -6,6 +6,11 @@ const form = document.querySelector('#transaction-form')
 const message = document.querySelector('#message')
 const transactionList = document.querySelector('#transaction-list')
 
+const totalIncomeElement = document.querySelector('#total-income')
+const totalExpensesElement = document.querySelector('#total-expenses')
+const balanceElement = document.querySelector('#balance')
+
+
 const descriptionField = new Field('description')
 descriptionField.addRule(
   new RequiredRule('Beskrivning måste fyllas i.')
@@ -106,6 +111,22 @@ form.reset()
 
 })
 
+function updateBudgetSummary(transactions) {
+  const totalIncome = transactions
+    .filter((transaction) => transaction.type === 'income')
+    .reduce((sum, transaction) => sum + Number(transaction.amount), 0)
+
+  const totalExpenses = transactions
+    .filter((transaction) => transaction.type === 'expense')
+    .reduce((sum, transaction) => sum + Number(transaction.amount), 0)
+
+  const balance = totalIncome - totalExpenses
+
+  totalIncomeElement.textContent = `€${totalIncome.toFixed(2)}`
+  totalExpensesElement.textContent = `€${totalExpenses.toFixed(2)}`
+  balanceElement.textContent = `€${balance.toFixed(2)}`
+}
+
 async function loadTransactions() {
   try {
     const response = await fetch('/api/transactions')
@@ -115,6 +136,7 @@ async function loadTransactions() {
     }
 
     const transactions = await response.json()
+    updateBudgetSummary(transactions)
 
     transactionList.replaceChildren()
 
