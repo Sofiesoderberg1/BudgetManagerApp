@@ -61,6 +61,8 @@ form.addEventListener('submit', async (event) => {
   
 message.textContent = 'Transaction added successfully!'
 
+await loadTransactions()
+
 
 const transaction = {
   description: data.description,
@@ -153,6 +155,8 @@ async function loadTransactions() {
   } catch (error) {
     console.error(error)
     message.textContent = 'Could not load transactions.'
+
+    await loadTransactions()
   }
 }
 
