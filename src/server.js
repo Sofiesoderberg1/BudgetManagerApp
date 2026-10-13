@@ -60,12 +60,6 @@ app.post('/api/transactions', async (req, res) => {
 })
 
 
-  transactions.push(transaction)
-
-  res.status(201).json(transaction)
-})
-
-
 connectToDatabase()
   .then((db) => {
     app.locals.db = db
