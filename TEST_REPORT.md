@@ -16,13 +16,13 @@ The purpose of this test report is to document the tests performed on BudgetMana
 | Test ID | Test description | Expected result | Actual result | Status |
 |---|---|---|---|---|
 | TC01 | Open the application | The application loads successfully. |The application loaded successfully. | Passed |
-| TC02 | Add an income transaction | The transaction is saved and displayed in the transaction list. The income total and balance are updated. | he income transaction was displayed once, and the totals were updated correctly. | Passed |
+| TC02 | Add an income transaction | The transaction is saved and displayed in the transaction list. The income total and balance are updated. | The income transaction was displayed once, and the totals were updated correctly. | Passed |
 | TC03 | Add an expense transaction | The transaction is saved and displayed in the transaction list. The expense total and balance are updated. | The expense transaction was displayed once, and the totals were updated correctly. | Passed |
 | TC04 | Submit the form with an empty description | A validation error is displayed and the transaction is not saved. | A validation error was displayed and the transaction was not saved. | Passed |
 | TC05 | Submit the form with an empty amount | A validation error is displayed and the transaction is not saved. | A validation error was displayed and the transaction was not saved. | Passed |
 | TC06 | Enter an amount of zero or a negative amount | A validation error is displayed and the transaction is not saved. | Both zero and negative amounts were rejected. | Passed |
 | TC07 | Reload the application after adding a transaction | Previously saved transactions are loaded from the database. | Previously saved transactions remained visible after reloading the page. | Passed |
-| TC08 | Change the transaction type | The available categories correspond to the selected transaction type. | Not tested yet | Not tested |
+| TC08 | Change the transaction type | The available categories correspond to the selected transaction type. | The available categories changed correctly when switching between income and expense. | Passed |
 | TC09 | Add a transaction and check the list | The transaction appears only once in the list. | The transaction appeared once before and after reloading the page. | Passed |
 
 ## 4. Test Summary
