@@ -63,6 +63,7 @@ validation.addField(amountField);
 validation.addField(categoryField);
 validation.addField(dateField);
 
+ 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -80,10 +81,6 @@ form.addEventListener("submit", async (event) => {
     message.textContent = result.errors[0].errorMessage;
     return;
   }
-
-  message.textContent = "Transaction added successfully!";
-
-  await loadTransactions();
 
   const transaction = {
     description: data.description,
@@ -106,32 +103,17 @@ form.addEventListener("submit", async (event) => {
       throw new Error("Could not save transaction.");
     }
 
-    const savedTransaction = await response.json();
-
     message.textContent = "Transaction added successfully!";
-
-    const listItem = document.createElement("li");
-    listItem.textContent =
-      `${savedTransaction.date} — ${savedTransaction.description} — ` +
-      `€${savedTransaction.amount.toFixed(2)} — ${savedTransaction.category} ` +
-      `(${savedTransaction.type})`;
-
-    transactionList.appendChild(listItem);
     form.reset();
+    updateCategories();
+    await loadTransactions();
   } catch (error) {
     message.textContent = "Could not save transaction. Please try again.";
     console.error(error);
   }
-
-  const listItem = document.createElement("li");
-  listItem.textContent =
-    `${transaction.date} — ${transaction.description} — ` +
-    `€${transaction.amount.toFixed(2)} — ${transaction.category} ` +
-    `(${transaction.type})`;
-
-  transactionList.appendChild(listItem);
-  form.reset();
 });
+
+
 
 function updateBudgetSummary(transactions) {
   const budget = new Budget();
@@ -182,8 +164,6 @@ async function loadTransactions() {
   } catch (error) {
     console.error(error);
     message.textContent = "Could not load transactions.";
-
-    await loadTransactions();
   }
 }
 
