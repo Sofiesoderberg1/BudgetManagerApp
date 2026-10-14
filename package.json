@@ -7,8 +7,9 @@
   "directories": {
     "test": "test"
   },
-  "scripts": {
-    "test": "node --test"
+ "scripts": {
+  "start": "node src/server.js",
+  "test": "node --test"
   },
   "repository": {
     "type": "git",
