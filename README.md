@@ -62,3 +62,10 @@ npm test
 ```
 
 The project uses Node.js's built-in test runner.
+
+Live application
+
+The application is deployed on Render and can be accessed here:
+
+Application URL:
+**Application URL:** https://budgetmanagerapp-5ewu.onrender.com/
