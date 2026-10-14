@@ -38,3 +38,22 @@ The tests covered application loading, income and expense transactions, form val
 ## 5. Conclusion
 
 All nine manual test cases passed. The tested functionality behaved as expected during the tests.
+
+## 6. Automated Tests
+
+Automated tests are executed using Node.js's built-in test runner with the command `npm test`.
+
+The automated tests cover:
+
+- Initial budget balance.
+- Income calculations.
+- Expense calculations.
+- Balance calculations with both income and expenses.
+- Required field validation.
+- Minimum amount validation.
+
+**Latest test result:**
+
+- Tests: 8
+- Passed: 8
+- Failed: 0
