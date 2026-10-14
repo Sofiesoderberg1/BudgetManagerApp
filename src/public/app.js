@@ -43,7 +43,7 @@ const totalExpensesElement = document.querySelector("#total-expenses");
 const balanceElement = document.querySelector("#balance");
 
 const descriptionField = new Field("description");
-descriptionField.addRule(new RequiredRule("Beskrivning måste fyllas i."));
+descriptionField.addRule(new RequiredRule("Description must be filled in."));
 
 const validation = new Validation();
 

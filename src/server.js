@@ -1,11 +1,12 @@
-
+import 'dotenv/config'
 import express from 'express'
 import { MongoClient } from 'mongodb'
 
 const app = express()
 const PORT = 3000
-const client = new MongoClient('mongodb://127.0.0.1:27017')
-const dbName = 'budgetmanager'
+const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'
+const client = new MongoClient(mongoUri)
+const dbName = 'budetmanager'
 async function connectToDatabase() {
   await client.connect()
   console.log('Connected to MongoDB!')
