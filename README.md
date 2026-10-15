@@ -48,7 +48,9 @@ The application should:
    npm install
    ```
 
-3. Start the Express server using the project's server command.
+3. Start the Express server:
+npm start
+
 4. Open `http://localhost:3000` in a web browser.
 
 MongoDB must be running for database functionality to work.
@@ -69,3 +71,12 @@ The application is deployed on Render and can be accessed here:
 
 Application URL:
 **Application URL:** https://budgetmanagerapp-5ewu.onrender.com/
+
+## Related modules
+
+- **BudgetManager:** [https://github.com/Sofiesoderberg1/BudgetManager](https://github.com/Sofiesoderberg1/BudgetManager)
+- **Validation module:** [https://github.com/Fielifia/form-validation](https://github.com/Fielifia/form-validation)
+
+## Project structure
+
+The application uses a separate BudgetManager module for budget calculations and transaction management. The Express application handles HTTP requests and communicates with MongoDB. Input validation is handled by the validation module.
