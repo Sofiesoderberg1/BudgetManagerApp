@@ -152,15 +152,29 @@ async function loadTransactions() {
     transactionList.replaceChildren();
 
     transactions.forEach((transaction) => {
-      const listItem = document.createElement("li");
+  const listItem = document.createElement("li");
 
-      listItem.textContent =
-        `${transaction.date} — ${transaction.description} — ` +
-        `€${Number(transaction.amount).toFixed(2)} — ` +
-        `${transaction.category} (${transaction.type})`;
+  const isIncome = transaction.type === "income";
+  listItem.classList.add(isIncome ? "income-transaction" : "expense-transaction");
 
-      transactionList.appendChild(listItem);
-    });
+  const description = document.createElement("span");
+  description.classList.add("transaction-description");
+  description.textContent = transaction.description;
+
+  const details = document.createElement("span");
+  details.classList.add("transaction-details");
+  details.textContent =
+    `${transaction.date} · ${transaction.category}`;
+
+  const amount = document.createElement("span");
+  amount.classList.add("transaction-amount");
+  amount.textContent =
+    `${isIncome ? "+" : "−"}€${Number(transaction.amount).toFixed(2)}`;
+
+  listItem.append(description, details, amount);
+  transactionList.appendChild(listItem);
+});
+
   } catch (error) {
     console.error(error);
     message.textContent = "Could not load transactions.";

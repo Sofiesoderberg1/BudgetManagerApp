@@ -1,53 +1,111 @@
 
+/* ---------- Base ---------- */
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 30px 20px;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #263238;
+:root {
+  --blue: #3978ff;
+  --purple: #8b43f5;
+  --dark: #151b4b;
+  --muted: #7180a5;
+  --background: #f5f7ff;
+  --border: #e8ecfb;
+  --green: #079875;
+  --pink: #e83e91;
 }
 
+body {
+  margin: 0;
+  padding: 40px 24px;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 0%, #e8eaff 0, transparent 38%),
+    radial-gradient(ellipse at 100% 15%, #e4f1ff 0, transparent 35%),
+    var(--background);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* ---------- Headings ---------- */
+
 h1 {
+  margin: 0 auto 36px;
   text-align: center;
-  margin-bottom: 30px;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--dark);
+}
+
+h1::first-letter {
+  color: var(--blue);
 }
 
 h2 {
-  margin-top: 30px;
+  margin-top: 34px;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+  color: var(--dark);
 }
+
+/* ---------- Summary cards ---------- */
 
 #budget-summary {
   max-width: 1000px;
-  margin: 0 auto 35px;
+  margin: 0 auto 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 #budget-summary > div {
-  display: inline-block;
-  vertical-align: top;
-  width: 32%;
-  min-width: 180px;
-  margin-right: 1%;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(226, 232, 255, 0.9);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(46, 67, 140, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#budget-summary > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(46, 67, 140, 0.12);
 }
 
 #budget-summary h3 {
-  margin-top: 0;
-  font-size: 15px;
-  color: #607d8b;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 #budget-summary p {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 0;
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  overflow-wrap: anywhere;
 }
+
+/* Highlight the first summary card */
+
+#budget-summary > div:first-child {
+  color: white;
+  background: linear-gradient(120deg, #238cf5, #6556f6 60%, #a24cf5);
+  border: none;
+  box-shadow: 0 12px 28px rgba(93, 91, 245, 0.23);
+}
+
+#budget-summary > div:first-child h3 {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* ---------- Main content ---------- */
 
 form,
 #transaction-list,
@@ -58,68 +116,405 @@ body > h2 {
 }
 
 form {
-  padding: 24px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(46, 67, 140, 0.07);
 }
 
 label {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 6px;
-  font-weight: bold;
+  margin-top: 17px;
+  margin-bottom: 7px;
+  color: var(--dark);
+  font-size: 0.92rem;
+  font-weight: 700;
 }
 
 input,
 select {
   width: 100%;
-  padding: 11px;
-  border: 1px solid #cbd5dc;
-  border-radius: 6px;
+  padding: 13px 15px;
+  border: 1px solid #dce3f5;
+  border-radius: 12px;
+  background: #fbfcff;
+  color: var(--dark);
   font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+input:focus,
+select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(57, 120, 255, 0.12);
+}
+
+/* ---------- Buttons ---------- */
+
 button {
-  margin-top: 20px;
-  padding: 12px 18px;
+  margin-top: 22px;
+  padding: 13px 23px;
   border: none;
-  border-radius: 6px;
-  background: #276749;
+  border-radius: 12px;
+  background: linear-gradient(110deg, var(--blue), var(--purple));
   color: white;
-  font-size: 15px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 7px 17px rgba(91, 91, 240, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
-  background: #1f5139;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(91, 91, 240, 0.3);
 }
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ---------- Messages ---------- */
 
 #message {
+  max-width: 1000px;
+  margin: 18px auto;
   text-align: center;
+  font-weight: 600;
 }
 
+/* ---------- Transactions ---------- */
+
 #transaction-list {
-  padding-left: 0;
+  padding: 0;
   list-style: none;
 }
 
 #transaction-list li {
-  margin-bottom: 10px;
-  padding: 15px;
-  background: white;
-  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 19px 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  box-shadow: 0 5px 18px rgba(46, 67, 140, 0.05);
   overflow-wrap: anywhere;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-@media (max-width: 650px) {
-  #budget-summary > div {
-    display: block;
-    width: 100%;
-    margin: 12px 0;
+#transaction-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 24px rgba(46, 67, 140, 0.1);
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media (max-width: 700px) {
+  body {
+    padding: 25px 15px;
   }
 
-  body {
-    padding: 20px 14px;
+  #budget-summary {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  #budget-summary > div {
+    padding: 20px;
+  }
+
+  form {
+    padding: 21px;
+  }
+
+  h1 {
+    margin-bottom: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+body > h2 {
+  max-width: 1000px;
+  margin: 0 auto 18px;
+}
+
+#budget-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+/* Transaction layout */
+
+#transaction-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 16px;
+  align-items: center;
+  padding: 20px 24px;
+  border-left: 5px solid transparent;
+}
+
+.transaction-description {
+  grid-column: 1;
+  font-weight: 700;
+  color: #151b4b;
+}
+
+.transaction-details {
+  grid-column: 1;
+  color: #7180a5;
+  font-size: 0.9rem;
+}
+
+.transaction-amount {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 1.05rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+#transaction-list li.income-transaction {
+  border-left-color: #0aaf83;
+}
+
+.income-transaction .transaction-amount {
+  color: #079875;
+}
+
+#transaction-list li.expense-transaction {
+  border-left-color: #f05a9d;
+}
+
+.expense-transaction .transaction-amount {
+  color: #e83e91;
+}
+
+@media (max-width: 480px) {
+  #transaction-list li {
+    padding: 16px;
+    gap: 5px 10px;
+  }
+
+  .transaction-amount {
+    font-size: 0.9rem;
+  }
+}
+
+/* Modern transaction form */
+
+#transaction-form {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e3e9ff;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(46, 67, 140, 0.07);
+}
+
+#transaction-form label {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: #343c69;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+#transaction-form input,
+#transaction-form select {
+  min-height: 48px;
+  padding: 13px 15px;
+  border: 1px solid #dfe5f5;
+  border-radius: 12px;
+  background: #f9faff;
+  color: #151b4b;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#transaction-form input:focus,
+#transaction-form select:focus {
+  border-color: #7665f5;
+  box-shadow: 0 0 0 4px rgba(118, 101, 245, 0.12);
+  outline: none;
+}
+
+#transaction-form button {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 28px;
+  border-radius: 13px;
+  background: linear-gradient(110deg, #3978ff, #8b43f5);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(91, 91, 240, 0.22);
+}
+
+#transaction-form button:hover {
+  filter: brightness(1.06);
+}
+
+@media (max-width: 480px) {
+  #transaction-form {
+    padding: 20px;
+  }
+}
+
+/* Page heading */
+
+body > h1 {
+  max-width: 1000px;
+  margin: 0 auto 42px;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.15;
+  text-align: center;
+  color: #171d4d;
+}
+
+/* Gradient on the first letter */
+
+body > h1::first-letter {
+  color: #6556f6;
+}
+
+/* Section headings */
+
+body > h2 {
+  max-width: 1000px;
+  margin: 36px auto 18px;
+  font-size: 1.45rem;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+  color: #202653;
+}
+
+/* Space between summary and form */
+
+#budget-summary {
+  margin-bottom: 42px;
+}
+
+/* Success and error message */
+
+#message {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Avoid excessive spacing on small screens */
+
+@media (max-width: 650px) {
+  body > h1 {
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+  }
+
+  body > h2 {
+    margin-top: 28px;
+  }
+
+  #budget-summary {
+    margin-bottom: 30px;
+  }
+}
+
+/* ---------- App header ---------- */
+
+.app-header {
+  max-width: 1000px;
+  margin: 0 auto 42px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5eaff;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(46, 67, 140, 0.07);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #3978ff, #8b43f5);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 800;
+  box-shadow: 0 7px 18px rgba(91, 91, 240, 0.25);
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-align: left;
+  color: #171d4d;
+}
+
+.logo-text p {
+  margin: 4px 0 0;
+  color: #7180a5;
+  font-size: 0.9rem;
+}
+
+.header-label {
+  padding: 9px 15px;
+  border: 1px solid #e5e3ff;
+  border-radius: 999px;
+  background: #f4f2ff;
+  color: #6953db;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .app-header {
+    padding: 18px;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .header-logo {
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    font-size: 1.5rem;
+  }
+
+  .logo-text p {
+    font-size: 0.78rem;
+  }
+
+  .header-label {
+    display: none;
   }
 }
