@@ -20,6 +20,9 @@ const expenseCategories = [
 
 const incomeCategories = ["Salary", "Student Support", "Business Profit"];
 
+/**
+ * Updates the available categories based on the selected transaction type.
+ */
 function updateCategories() {
   const categories =
     typeField.value === "income" ? incomeCategories : expenseCategories;
@@ -63,7 +66,10 @@ validation.addField(amountField);
 validation.addField(categoryField);
 validation.addField(dateField);
 
- 
+/**
+ * Validates the form and submits a new transaction to the server.
+ * Updates the message and transaction list after the request.
+ */
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -75,6 +81,7 @@ form.addEventListener("submit", async (event) => {
     date: formData.get("date"),
   };
 
+   // Stop submission if any field fails validation.
   const result = validation.validate(data);
 
   if (!result.success) {
@@ -91,6 +98,7 @@ form.addEventListener("submit", async (event) => {
   };
 
   try {
+      // Send the validated transaction to the server as JSON
     const response = await fetch("/api/transactions", {
       method: "POST",
       headers: {
@@ -114,10 +122,14 @@ form.addEventListener("submit", async (event) => {
 });
 
 
-
+/**
+ * Updates the displayed budget totals using the transactions.
+ *
+ * @param {Object[]} transactions - The transactions used to calculate the totals.
+ */
 function updateBudgetSummary(transactions) {
   const budget = new Budget();
-
+  // Convert expense to outcome to match the Budget module's terminology.
   transactions.forEach((transaction) => {
     const type = transaction.type === "expense" ? "outcome" : transaction.type;
 
@@ -138,6 +150,10 @@ function updateBudgetSummary(transactions) {
   balanceElement.textContent = `€${balance.toFixed(2)}`;
 }
 
+/**
+ * Fetches transactions from the server and displays them in the interface.
+ * Also updates the budget summary.
+ */
 async function loadTransactions() {
   try {
     const response = await fetch("/api/transactions");
@@ -148,7 +164,7 @@ async function loadTransactions() {
 
     const transactions = await response.json();
     updateBudgetSummary(transactions);
-
+    // Remove old entries before displaying the latest transactions.
     transactionList.replaceChildren();
 
     transactions.forEach((transaction) => {

@@ -11,7 +11,22 @@ The purpose of this test report is to document the tests performed on BudgetMana
 - Browser: Microsoft Edge
 - Database: MongoDB
 
-## 3. Test Cases
+## 3. Requirements
+
+| Requirement ID | Requirement description | Related test cases |
+|---|---|---|
+| R1 | The application must allow users to add income transactions. | TC02 |
+| R2 | The application must allow users to add expense transactions. | TC03 |
+| R3 | The application must require a description, amount, category and date for each transaction. | TC04, TC05 |
+| R4 | The application must reject empty required fields. | TC04, TC05 |
+| R5 | The application must reject transaction amounts that are zero or negative. | TC06 |
+| R6 | The application must display saved transactions in a list. | TC02, TC03 |
+| R7 | The application must calculate total income, total expenses and the current balance correctly. | TC02, TC03 |
+| R8 | The application must save transactions in MongoDB so they remain available after reloading the application. | TC07 |
+| R9 | The application must display categories according to the selected transaction type. | TC08 |
+| R10 | The application must display each transaction only once in the transaction list. | TC09 |
+
+## 4. Test Cases
 
 | Test ID | Test description | Expected result | Actual result | Status |
 |---|---|---|---|---|
@@ -25,7 +40,7 @@ The purpose of this test report is to document the tests performed on BudgetMana
 | TC08 | Change the transaction type | The available categories correspond to the selected transaction type. | The available categories changed correctly when switching between income and expense. | Passed |
 | TC09 | Add a transaction and check the list | The transaction appears only once in the list. | The transaction appeared once before and after reloading the page. | Passed |
 
-## 4. Test Summary
+## 5. Test Summary
 
 A total of nine manual test cases were performed.
 
@@ -35,11 +50,11 @@ A total of nine manual test cases were performed.
 
 The tests covered application loading, income and expense transactions, form validation, database persistence, category selection, and duplicate transaction display.
 
-## 5. Conclusion
+## 6. Conclusion
 
 All nine manual test cases passed. The tested functionality behaved as expected during the tests.
 
-## 6. Automated Tests
+## 7. Automated Tests
 
 Automated tests are executed using Node.js's built-in test runner with the command `npm test`.
 
